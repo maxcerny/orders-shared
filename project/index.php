@@ -1,4 +1,10 @@
 <?php
 include "lib/lib.php";
 
-var_dump(getClient());
+require_once ("lib/connection.php");
+$client = getClient();
+if (is_a($client, "Google_client")) {
+    echo $client;
+} else {
+    echo "exists";
+}
