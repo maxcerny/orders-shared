@@ -1,4 +1,8 @@
 <?php
+
+require 'C:\xampp\htdocs\orders-shared\composer.phar';
+
+
 function getClient() {
     $client = new Google_Client();
     $client->setApplicationName('Google Calendar API PHP Quickstart');
