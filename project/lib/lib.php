@@ -1,6 +1,6 @@
 <?php
 
-require 'C:\xampp\htdocs\orders-shared\composer.phar';
+require 'composer.phar';
 
 
 function getClient() {
