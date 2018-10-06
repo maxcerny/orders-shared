@@ -32,10 +32,12 @@ function getClient()
             $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
         } else {
             // Request authorization from the user.
-            $authUrl = $client->createAuthUrl();
-            printf("Open the following link in your browser:\n%s\n", $authUrl);
-            print 'Enter verification code: ';
-            $authCode = trim(fgets(STDIN));
+            if (!credentials_in_browser()) {
+                $authUrl = $client->createAuthUrl();
+                return "<a href='$authUrl'>Click here to link your Account</a>";
+            }
+
+            $authCode = $_GET["code"];
 
             // Exchange authorization code for an access token.
             $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
@@ -53,6 +55,12 @@ function getClient()
         file_put_contents($tokenPath, json_encode($client->getAccessToken()));
     }
     return $client;
+}
+
+function credentials_in_browser() {
+    if (isset($_GET["code"])) return true;
+
+    return false;
 }
 
 
